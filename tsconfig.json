@@ -1,0 +1,36 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "outDir": "./dist",
+        "rootDir": "./src/server",
+        "strict": true,
+        "baseUrl": "./src/server",
+        "paths": {
+            "*": [
+                "*",
+                "dist/*"
+            ],
+            "@constants": [
+                "/constants",
+                "/dist/constants"
+            ]
+        },
+        "typeRoots": [
+            "../../node_modules/@types"
+        ]
+    },
+    "include": ["./src/server"],
+    "exclude": ["./src/client", "node_modules"],
+    "files": ["src/server/types.d.ts"],
+    "typedocOptions": {
+        "mode": "modules",
+        "out": "docs",
+        "exclude": "**/*+(index|.spec).ts",
+        "readme": "./README.md",
+        "name": "The Avenger App - API docs"
+    }
+}

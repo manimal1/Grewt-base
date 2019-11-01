@@ -1,0 +1,14 @@
+# webpack files
+webpack/
+webpack.config.js
+
+# dependencies
+node_modules/
+
+# build directories
+dist/
+public/
+docs/
+
+# tools and config
+.env
