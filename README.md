@@ -4,10 +4,10 @@
 
 **M**ySQL* / MongoDB*
 
-**G**raphQL*
-**R**eact
-**E**xpress*
-**W**ebpack
+**G**raphQL*  
+**R**eact  
+**E**xpress*  
+**W**ebpack  
 **T**ypeScript
 
 Items with \* means they are options. You can choose either mySQL or MongoDB as your database of choice. You can also choose either GraphQL or Express as your server. There is also an option to choose either Redux or MobX for your clientside state management, but this option has no impact on the scaffolding code but rather just the dependencies that will be loaded so that you do not have to.

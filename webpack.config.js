@@ -116,7 +116,9 @@ module.exports = env => {
         mainFields: ['module', 'browser', 'main'],
         alias: {
           components: path.resolve(__dirname + '/src/client/components'),
-          resources: path.resolve(__dirname + '/src/client/resources')
+          core: path.resolve(__dirname + '/src/client/core'),
+          resources: path.resolve(__dirname + '/src/client/resources'),
+          utils: path.resolve(__dirname + '/src/client/utils')
         }
       }
     },

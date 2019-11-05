@@ -11,6 +11,7 @@ module.exports = () => ({
       "/api": "http://localhost:5000"
     },
     port: 4000,
-    hot: true
+    hot: true,
+    historyApiFallback: true
   }
 });
