@@ -1,0 +1,13 @@
+{
+  "configurations": [{
+    "type": "chrome",
+    "request": "launch",
+    "name": "Launch Chrome Debugger",
+    "port": 9222,
+    "url": "http://localhost:4000/",
+    "webRoot": "${workspaceRoot}/dist/client",
+    "sourceMaps": true,
+    "timeout": 15000,
+    "trace": "verbose"
+  }]
+}

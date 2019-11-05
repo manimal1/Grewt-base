@@ -82,9 +82,28 @@ As stated above in [How to run the project](##How-to-run-the-project), use these
 
 ## --- FRONTEND ---
 
-### React / Redux
+### React
 
-React is the frontend library used in this project. Redux or MobX can be used for state management. The Material-UI library and Sass are also used for simple styling.
+React is the frontend library used in this project. The Material-UI library and Sass are also used for simple styling.
 
 - Frontend routing employs React's BrowserRouter from the stand alone lib [react-router-dom](https://www.npmjs.com/package/react-router-dom). Check out helpful docs [here](https://reacttraining.com/react-router/web/guides/quick-start)
+- [Material-UI](https://material-ui.com/)
+- [Sass](https://sass-lang.com/)
+
+### Redux or MobX
+
+Currently, Redux is being used for state management. Soon, MobX will also be available.
+
 - [Redux](https://redux.js.org/) has been configured with a couple of useful middlewares: [redux-thunk](https://github.com/reduxjs/redux-thunk) for handling async logic, and the [Redux DevTools Extension](http://extension.remotedev.io/)
+
+## --- BACKEND ---
+
+Only Node for me!
+
+### Express or GraphQL
+
+Basically, do you want a REST API or a GraphQL API?
+
+### MySQL or MongoDB
+
+Which do you need: relational or non-relational? Tables or documents?
