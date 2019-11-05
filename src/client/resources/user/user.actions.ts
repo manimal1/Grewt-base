@@ -12,6 +12,18 @@ const {
   SIGNUP_FAIL
 } = USER;
 
+interface DecodedToken {
+  id: number;
+  iat: number;
+  exp: number;
+}
+
+interface User {
+  firstname: string;
+  lastname: string;
+  email: string;
+}
+
 export const userSignInRequest = (): { type: string } => ({ type: SIGNIN_REQUEST });
 
 export const userSignInSuccess = (decoded: object): { type: string; payload: object } => ({
@@ -39,7 +51,7 @@ export const userSignUpFail = (err: any): { type: string; payload: any } => ({
 export const userSignup = (userData: any, history: any) => (dispatch: any): Promise<void> => {
   dispatch(userSignUpRequest());
   return axios
-    .post('/signup', userData)
+    .post('/auth/signup', userData)
     .then(res => {
       dispatch(userSignUpSuccess(res));
       history.push('/');
@@ -50,15 +62,23 @@ export const userSignup = (userData: any, history: any) => (dispatch: any): Prom
 export const userSignin = (userData: any, history: any) => (dispatch: any): Promise<void> => {
   dispatch(userSignInRequest());
   return axios
-    .post('/signin', userData)
+    .post('/auth/signin', userData)
     .then(res => {
       const { token } = res.data;
+      const { user } = res.data;
+      const userObj: User = {
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email
+      };
       // add token to auth header
       setAuthToken(token);
       // decode token to get user data
-      const decoded: object = jwtDecode(token);
+      const decoded: DecodedToken = jwtDecode(token);
+      // concat userObj with decoded token info
+      const resData = { ...decoded, ...userObj };
       // set current user
-      dispatch(userSignInSuccess(decoded));
+      dispatch(userSignInSuccess(resData));
       history.push('/');
     })
     .catch(err => dispatch(userSignInFail(err)));

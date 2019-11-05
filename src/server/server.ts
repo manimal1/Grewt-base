@@ -7,7 +7,7 @@ import compression from 'compression';
 import 'module-alias/register';
 
 import { config } from './config';
-import { dbConnection, routesController } from './utils';
+import { dbConnection, getRoutes } from './utils';
 
 const { json, urlencoded } = bodyParser;
 const { port } = config;
@@ -28,9 +28,19 @@ app.set('views', 'public');
 // you don't need to specify ./dist since the index file is located there
 app.use(express.static(path.join(__dirname, 'client')));
 
-// use your routes that are set in the routes file
-// separation of concerns keeps things neat and tidy here
-routesController(app);
+// set production build to load index file or client side routing
+if (process.env.NODE_ENV === 'production') {
+  app.get('/*', (req: express.Request, res: express.Response) => {
+    res.sendFile(path.join(__dirname, 'client', 'index.html'));
+  });
+} else {
+  // webpack dev server handles client routing otherwise
+  app.get('/', (req: express.Request, res: express.Response) => {
+    res.send('endpoint works!');
+  });
+}
+// get and use routes set in the routes file
+getRoutes(app);
 
 export const start = async (): Promise<void> => {
   /* eslint-disable no-console */
@@ -46,7 +56,7 @@ export const start = async (): Promise<void> => {
 
     // launch express app
     app.listen(port, () => {
-      console.log(`REST API on http://localhost:${port}/api`);
+      console.log(`REST API on http://localhost:${port}/`);
     });
   } catch (err) {
     console.log({ err });

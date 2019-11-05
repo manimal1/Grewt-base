@@ -48,7 +48,7 @@ class Signin extends Component<SigninProps, SigninState> {
     const buttonLabel = 'Submit';
     const inputItems = [
       { label: 'email', type: 'email', value: email },
-      { label: 'password', type: 'password', value: password }
+      { label: 'password', type: 'text', value: password }
     ];
 
     return (

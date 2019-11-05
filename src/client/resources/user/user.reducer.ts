@@ -30,21 +30,23 @@ const initialState: AuthState = {
 const authReducer = (state: AuthState = initialState, action: ReducerAction): AuthState => {
   const { type, payload } = action;
   const isFetchingState = { ...state, isFetching: true };
+  const isNotFetchingState = { ...state, isFetching: false };
 
   switch (type) {
     case SIGNUP_REQUEST:
       return isFetchingState;
     case SIGNUP_SUCCESS:
-      return { ...state };
+      return isNotFetchingState;
     case SIGNUP_FAIL:
-      return { ...state };
+      return isNotFetchingState;
     case SIGNIN_REQUEST:
       return isFetchingState;
     case SIGNIN_FAIL:
-      return { ...state };
+      return isNotFetchingState;
     case SIGNIN_SUCCESS:
       return {
         ...state,
+        isFetching: false,
         isAuthenticated: !isEmpty(payload),
         user: payload
       };

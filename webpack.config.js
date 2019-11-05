@@ -14,14 +14,14 @@ module.exports = env => {
         new CleanWebpackPlugin(),
         // use the html-webpack-template to setup the auto generated html file - useful when running devserver
         new HtmlWebpackPlugin({
-          title: 'I. M. GRREWT - The Fullstack Avenger App',
+          title: 'I. M. GREWT - The Fullstack Avenger App',
           inject: false,
           template: require('html-webpack-template'),
           appMountId: 'root',
           meta: [
             {
               name: 'description',
-              content: 'Instantiates MySQL GraphQL React Redux Express Webpack TypeScript'
+              content: 'Instantiates React Webpack TypeScript app, with choices for MySQL / MongoDB, GraphQL / Express, Redux / MobX'
             },
             {
               name: 'viewport',
@@ -54,7 +54,20 @@ module.exports = env => {
       output: {
         filename: '[name].bundle.js',
         chunkFilename: '[name].chunk.js',
-        path: path.resolve(__dirname + '/dist/client')
+        path: path.resolve(__dirname + '/dist/client'),
+        publicPath: '/'
+      },
+
+      devServer: {
+        contentBase: path.resolve(__dirname + '/dist/client'),
+        // proxy allows for same origin use of this server with api server
+        proxy: {
+          "/auth": "http://localhost:5000/",
+          "/api": "http://localhost:5000/"
+        },
+        historyApiFallback: true,
+        hot: true,
+        port: 4000
       },
 
       resolve: {

@@ -1,5 +1,5 @@
 import dbConnection from './db';
-import routesController from './routes';
+import getRoutes from './routes';
 import { parseSqlResult } from './sql.helpers';
 
-export { dbConnection, parseSqlResult, routesController };
+export { dbConnection, parseSqlResult, getRoutes };
