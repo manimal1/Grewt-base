@@ -1,4 +1,4 @@
-# I. M. GRREWT (pronouned: I AM GROOT) - The Fullstack Avenger App scaffolding project
+# I. M. GREWT (pronouned: I AM GROOT) - The Fullstack Avenger App scaffolding project
 
 **I**stantiates
 
@@ -86,5 +86,5 @@ As stated above in [How to run the project](##How-to-run-the-project), use these
 
 React is the frontend library used in this project. Redux or MobX can be used for state management. The Material-UI library and Sass are also used for simple styling.
 
-- Frontend routing employs React's BrowserRouter from the stand alone lib[react-router-dom](https://www.npmjs.com/package/react-router-dom). Check out helpful docs [here](https://reacttraining.com/react-router/web/guides/quick-start)
+- Frontend routing employs React's BrowserRouter from the stand alone lib [react-router-dom](https://www.npmjs.com/package/react-router-dom). Check out helpful docs [here](https://reacttraining.com/react-router/web/guides/quick-start)
 - [Redux](https://redux.js.org/) has been configured with a couple of useful middlewares: [redux-thunk](https://github.com/reduxjs/redux-thunk) for handling async logic, and the [Redux DevTools Extension](http://extension.remotedev.io/)
