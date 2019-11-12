@@ -12,6 +12,7 @@
     "@types/compression": "^1.0.1",
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.1",
+    "@types/jest": "^24.0.22",
     "@types/jsonwebtoken": "^8.3.5",
     "@types/jwt-decode": "^2.2.1",
     "@types/lodash": "^4.14.144",
@@ -30,20 +31,26 @@
     "@typescript-eslint/parser": "^2.4.0",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.2.0",
+    "cypress": "^3.6.1",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-cypress": "^2.7.0",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^23.0.2",
     "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react-hooks": "^2.2.0",
     "file-loader": "^4.2.0",
     "html-webpack-plugin": "^3.2.0",
     "html-webpack-template": "^6.2.0",
     "jest": "^24.9.0",
+    "link-module-alias": "^1.2.0",
     "nodemon": "^1.19.3",
     "prettier": "^1.18.2",
     "sass-loader": "^8.0.0",
     "source-map-loader": "^0.2.4",
     "style-loader": "^1.0.0",
+    "ts-jest": "^24.1.0",
     "ts-loader": "^6.2.0",
     "ts-node": "^8.4.1",
     "tsconfig-paths": "^3.9.0",
@@ -68,7 +75,6 @@
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.15",
-    "module-alias": "^2.2.2",
     "morgan": "^1.9.1",
     "mysql": "^2.17.1",
     "node-sass": "^4.12.0",
@@ -82,6 +88,8 @@
     "rimraf": "^3.0.0"
   },
   "scripts": {
+    "preinstall": "command -v link-module-alias && link-module-alias clean || true",
+    "postinstall": "link-module-alias",
     "build:backend": "tsc && yarn run start:api",
     "build:backend-dev": "tsc && yarn run start:api-dev",
     "build:frontend": "webpack --env.NODE_ENV=production",
@@ -92,7 +100,8 @@
     "start:api-dev": "export NODE_ENV=development && node ./dist/index.js",
     "start:dev": "rimraf dist && nodemon --exec yarn run build:dev",
     "lint": "eslint \"src/**/*.ts\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_ENV=testing jest --forceExit --detectOpenHandles",
+    "test:e2e": "cypress open",
     "build:docs": "typedoc src/server"
   },
   "lint-staged": {
@@ -101,9 +110,16 @@
     ]
   },
   "jest": {
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
     "verbose": true
   },
   "_moduleAliases": {
-    "@constants": "dist/constants"
+    "~root": ".",
+    "~config": "./src/server/config",
+    "~constants": "./src/server/constants",
+    "~resources": "./src/server/resources",
+    "~utils": "./src/server/utils"
   }
 }

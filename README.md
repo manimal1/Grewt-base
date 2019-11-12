@@ -40,7 +40,7 @@ This project uses node environment variables that you will need to set in order 
 
 Run all commands from root directory:
 
-The first step is to load all dependencies (only perform once after intial pull):
+The first step is to load all dependencies (should only need to perform once after intial pull):
 
 - `yarn install`
 
@@ -48,7 +48,7 @@ To build and run the development server, use the following command:
 
 - `yarn run start:dev`
 
-To create a production build, which compiles output to the ./dist directory, run the following command:
+To create a production build, which compiles all output to the ./dist directory, run the following command:
 
 - `yarn run build`
 
@@ -56,16 +56,16 @@ To run the linter process and perform a code quality check, run:
 
 - `yarn run linter`
 
-The following commands run server-side and client-side tests:
+The following commands run unit and end-to-end tests:
 
-- For server-side tests run `yarn test`
-- For client-side tests run `yarn run client-tests`
+- For jest unit tests `yarn test`
+- For end-to-end tests run `yarn run test:e2e`
 
-## Linting
+## Linting & Formatting
 
-This project uses eslint and prettier to maintain code standards and consistency. You should configure your editor according to your personal preferences, but I've included a .vscode settings file as that is my preferred editor - which you should definitely delete if you use another code editor. You can run the linter with this command: `yarn run linter`
+This project uses [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/) to maintain code standards and consistency. You should configure your editor and adjust the eslint and prettier files to suit your own personal preferences. You can run the linter with this command: `yarn run linter`.
 
-Files that handle linting:
+Files that handle linting and formatting:
 
 - .eslintrc
 - .eslintignore
@@ -73,12 +73,50 @@ Files that handle linting:
 
 ## Testing
 
-This project uses [Jest](https://jestjs.io/) as it's testing framework.
+This project uses [Jest](https://jestjs.io/) for unit testing and [Cypress](https://www.cypress.io/) for end-to-end testing. Since we are using TypeScript with Cypress, I recommend reading [their short intro on the subject](https://docs.cypress.io/guides/tooling/typescript-support.html#Transpiling-TypeScript-test-files).
 
 As stated above in [How to run the project](##How-to-run-the-project), use these commands to run your tests:
 
-- For server-side tests run `yarn test`
-- For client-side tests run `yarn run client-tests`
+- For jest unit tests `yarn test`
+- For end-to-end tests run `yarn run test:e2e`
+
+## Aliases
+
+### Server
+
+This app uses the [link-module-alias](https://www.npmjs.com/package/link-module-alias) package to create simple aliases for module resolution on the server, to avoid using long relative path imports. There is a preinstall and postinstall script associated with this package that runs on install to create the symlinks. In order to create your own aliases, just place them in the `package.json` file inside the `_moduleAliases` object.
+
+You might also have to update the import/resolver alias mapping in the `.eslintrc` file in order for eslint to recognize the alias:
+
+```json
+"import/resolver": {
+  "node": {
+    "alias": {
+      "map": [
+        ["~config", "src/server/config"],
+        ["~constants", "src/server/constants"],
+        ["~resources", "src/server/resources"],
+        ["~utils", "src/server/utils"]
+      ]
+    }
+  }
+}
+```
+
+### Client
+
+In the client we use [Webpack's 'Resolve'](https://webpack.js.org/configuration/resolve/) options to manage aliases. Just update the `webpack.config.js` file in the root diretory:
+
+```javascript
+resolve: {
+  alias: {
+    components: path.resolve(__dirname + '/src/client/components'),
+    core: path.resolve(__dirname + '/src/client/core'),
+    resources: path.resolve(__dirname + '/src/client/resources'),
+    utils: path.resolve(__dirname + '/src/client/utils')
+  }
+}
+```
 
 ## --- FRONTEND ---
 
@@ -94,7 +132,8 @@ React is the frontend library used in this project. The Material-UI library and 
 
 Currently, Redux is being used for state management. Soon, MobX will also be available.
 
-- [Redux](https://redux.js.org/) has been configured with a couple of useful middlewares: [redux-thunk](https://github.com/reduxjs/redux-thunk) for handling async logic, and the [Redux DevTools Extension](http://extension.remotedev.io/)
+- [Redux](https://redux.js.org/) has been configured with a couple of useful middlewares: [redux-thunk](https://github.com/reduxjs/redux-thunk) for handling async logic, and the [Redux DevTools Extension](http://extension.remotedev.io/). If you choose to use Redux, I would also recommend using the [reselect](https://github.com/reduxjs/reselect) library, especially for larger applications.
+- [MobX](https://mobx.js.org/README.html) is the other great option for state management.
 
 ## --- BACKEND ---
 
@@ -104,6 +143,12 @@ Only Node for me!
 
 Basically, do you want a REST API or a GraphQL API?
 
+- [Express](https://expressjs.com/)
+- [GraphQL](https://graphql.org/)
+
 ### MySQL or MongoDB
 
 Which do you need: relational or non-relational? Tables or documents?
+
+- [MySQL](https://www.mysql.com/)
+- [MongoDB](https://www.mongodb.com/)
