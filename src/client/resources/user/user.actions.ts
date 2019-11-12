@@ -19,16 +19,18 @@ interface DecodedToken {
 }
 
 interface User {
-  firstname: string;
-  lastname: string;
+  firstname?: string;
+  lastname?: string;
   email: string;
 }
 
 export const userSignInRequest = (): { type: string } => ({ type: SIGNIN_REQUEST });
 
-export const userSignInSuccess = (decoded: object): { type: string; payload: object } => ({
+export const userSignInSuccess = (
+  userData: (DecodedToken & User) | {}
+): { type: string; payload: (DecodedToken & User) | {} } => ({
   type: SIGNIN_SUCCESS,
-  payload: decoded
+  payload: userData
 });
 
 export const userSignInFail = (err: any): { type: string; payload: any } => ({
@@ -64,8 +66,7 @@ export const userSignin = (userData: any, history: any) => (dispatch: any): Prom
   return axios
     .post('/auth/signin', userData)
     .then(res => {
-      const { token } = res.data;
-      const { user } = res.data;
+      const { token, user } = res.data;
       const userObj: User = {
         firstname: user.firstname,
         lastname: user.lastname,
