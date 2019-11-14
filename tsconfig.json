@@ -10,19 +10,35 @@
         "strict": true,
         "baseUrl": "./src/server",
         "paths": {
-            "*": [
-                "*",
-                "dist/*"
+            "~config": [
+                "config",
+                "dist/config"
             ],
-            "@constants": [
-                "/constants",
-                "/dist/constants"
+            "~constants": [
+                "constants",
+                "dist/constants"
+            ],
+            "~resources": [
+                "resources",
+                "dist/resources"
+            ],
+            "~utils": [
+                "utils",
+                "dist/utils"
             ]
         }
     },
-    "include": ["./src/server"],
-    "exclude": ["./src/client", "node_modules", "**/*.spec.ts"],
-    "files": ["src/server/types.d.ts"],
+    "include": [
+        "./src/server"
+    ],
+    "exclude": [
+        "./src/client",
+        "node_modules",
+        "**/*.spec.ts"
+    ],
+    "files": [
+        "src/server/types.d.ts"
+    ],
     "typedocOptions": {
         "mode": "modules",
         "out": "docs",

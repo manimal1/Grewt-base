@@ -1,4 +1,4 @@
-# I. M. GREWT (pronouned: I AM GROOT) - The Fullstack Avenger App scaffolding project
+# I. M. GREWT (pronouned: I AM GROOT) - The Fullstack Avenger App boilerplate project
 
 **I**stantiates
 
@@ -84,7 +84,7 @@ As stated above in [How to run the project](##How-to-run-the-project), use these
 
 ### Server
 
-This app uses the [link-module-alias](https://www.npmjs.com/package/link-module-alias) package to create simple aliases for module resolution on the server, to avoid using long relative path imports. There is a preinstall and postinstall script associated with this package that runs on install to create the symlinks. In order to create your own aliases, just place them in the `package.json` file inside the `_moduleAliases` object.
+This app uses the [link-module-alias](https://www.npmjs.com/package/link-module-alias) package to create simple aliases for module resolution on the server, to avoid using long relative path imports. There is a preinstall and postinstall script associated with this package that runs on install to create the symlinks. In order to create your own aliases, just place them in the `package.json` file inside the `_moduleAliases` object, and update the `compilerOptions.paths` properties in the root `tsconfig.json` file.
 
 You might also have to update the import/resolver alias mapping in the `.eslintrc` file in order for eslint to recognize the alias:
 
