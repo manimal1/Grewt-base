@@ -1,7 +1,8 @@
 {
   "root": true,
   "env": {
-    "node": true
+    "node": true,
+    "jest": true
   },
   "extends": [
     "airbnb-base",
@@ -10,7 +11,12 @@
     "prettier/@typescript-eslint"
   ],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": [
+    "@typescript-eslint",
+    "react-hooks",
+    "jest",
+    "cypress"
+  ],
   "settings": {
     "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
     "import/parsers": {
@@ -18,7 +24,15 @@
     },
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        "alias": {
+          "map": [
+            ["~config", "src/server/config"],
+            ["~constants", "src/server/constants"],
+            ["~resources", "src/server/resources"],
+            ["~utils", "src/server/utils"]
+          ],
+          "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        }
       }
     }
   },
@@ -29,12 +43,3 @@
     "import/no-unresolved": "off"
   }
 }
-
-// "parserOptions": {
-// "tsconfigRootDir": "./",
-// "project": [
-//   "./tsconfig.json",
-//   "./src/**/tsconfig.json"
-// ],
-// "sourceType": "module"
-// },

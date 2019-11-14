@@ -9,11 +9,12 @@
     },
     "target": "es6",
     "module": "commonjs",
-    "sourceMap": true,
     "jsx": "react",
+    "sourceMap": true,
     "strict": true,
     "esModuleInterop": true,
     "lib": ["es6", "dom"]
   },
-  "include": ["./"]
+  "include": ["./"],
+  "exclude": ["**/*.spec.ts"]
 }

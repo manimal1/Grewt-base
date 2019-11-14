@@ -4,7 +4,6 @@ import express from 'express';
 import morgan from 'morgan';
 import path from 'path';
 import compression from 'compression';
-import 'module-alias/register';
 
 import { config } from './config';
 import { dbConnection, getRoutes } from './utils';
