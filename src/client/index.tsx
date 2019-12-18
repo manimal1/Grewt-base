@@ -15,7 +15,7 @@ declare global {
 }
 
 const initialState = {};
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // eslint-disable-line
 const middlewares = [thunk, logger];
 
 const store = createStore(
@@ -28,5 +28,5 @@ render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root') as HTMLElement
+  document.getElementById('root') as HTMLElement // eslint-disable-line
 );

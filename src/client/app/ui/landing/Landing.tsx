@@ -10,7 +10,17 @@ interface ButtonProps {
   label: string;
 }
 
-const Landing = () => {
+function renderButtons(buttons: ButtonProps[]): React.ReactNode {
+  return buttons.map(button => (
+    <Link key={button.key} className="link" to={button.path}>
+      <Button variant="contained" color="primary">
+        {button.label}
+      </Button>
+    </Link>
+  ));
+}
+
+const Landing = (): React.ReactElement => {
   const title = 'Welcome to the Landing Page!';
   const buttons = [
     {
@@ -34,15 +44,5 @@ const Landing = () => {
     </div>
   );
 };
-
-function renderButtons(buttons: ButtonProps[]) {
-  return buttons.map(button => (
-    <Link key={button.key} className="link" to={button.path}>
-      <Button variant="contained" color="primary">
-        {button.label}
-      </Button>
-    </Link>
-  ));
-}
 
 export default Landing;

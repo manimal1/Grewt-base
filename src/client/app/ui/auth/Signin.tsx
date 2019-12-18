@@ -25,30 +25,29 @@ class Signin extends Component<SigninProps, SigninState> {
     };
   }
 
-  onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const { email, password } = this.state;
     const user = {
-      email: email,
-      password: password
+      email,
+      password
     };
 
     this.props.userSignin(user, this.props.history);
   };
 
-  render() {
+  render(): React.ReactNode {
     const { email, password } = this.state;
-    const onChange = this.onChange;
-    const onSubmit = this.onSubmit;
+    const { onChange, onSubmit } = this;
     const titleLabel = 'Sign in';
     const buttonLabel = 'Submit';
     const inputItems = [
-      { label: 'email', type: 'email', value: email },
-      { label: 'password', type: 'text', value: password }
+      { key: 'signin-email-key', label: 'email', type: 'email', value: email },
+      { key: 'signin-password-key', label: 'password', type: 'text', value: password }
     ];
 
     return (
@@ -65,7 +64,7 @@ class Signin extends Component<SigninProps, SigninState> {
   }
 }
 
-const mapStateToProps = (state: { auth: any }) => ({
+const mapStateToProps = (state: { auth: any }): object => ({
   auth: state.auth
 });
 

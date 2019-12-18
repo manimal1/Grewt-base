@@ -5,9 +5,34 @@ import { Card, CardContent, CardActions, Button, TextField, Typography } from 'c
 import './basicForm.scss';
 
 interface InputItem {
+  key: string;
   label: string;
   type: string;
   value: any;
+}
+
+function renderInputs(
+  inputItems: InputItem[],
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+): React.ReactNode {
+  return inputItems.map(item => {
+    return (
+      <TextField
+        required
+        className="basic-form-textfield"
+        key={item.key}
+        id={item.label}
+        name={item.label}
+        label={item.label}
+        type={item.type}
+        autoComplete={`current-${item.label}`}
+        margin="normal"
+        value={item.value}
+        onChange={onChange}
+        fullWidth
+      />
+    );
+  });
 }
 
 interface Props {
@@ -18,7 +43,7 @@ interface Props {
   inputItems: InputItem[];
 }
 
-const BasicForm: React.FC<Props> = props => {
+function BasicForm(props: Props): React.ReactElement {
   const { titleLabel, buttonLabel, inputItems, onChange, onSubmit } = props;
 
   return (
@@ -40,29 +65,6 @@ const BasicForm: React.FC<Props> = props => {
       </div>
     </form>
   );
-};
-
-function renderInputs(
-  inputItems: InputItem[],
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-) {
-  return inputItems.map((item, index) => {
-    return (
-      <TextField
-        className="basic-form-textfield"
-        key={`signup-${index}`}
-        id={item.label}
-        name={item.label}
-        label={item.label}
-        type={item.type}
-        autoComplete={`current-${item.label}`}
-        margin="normal"
-        value={item.value}
-        onChange={onChange}
-        fullWidth
-      />
-    );
-  });
 }
 
 export default BasicForm;
