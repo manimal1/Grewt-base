@@ -24,6 +24,11 @@ interface User {
   email: string;
 }
 
+interface ReducerPayload {
+  type: string;
+  payload: any;
+}
+
 export const userSignInRequest = (): { type: string } => ({ type: SIGNIN_REQUEST });
 
 export const userSignInSuccess = (
@@ -33,19 +38,19 @@ export const userSignInSuccess = (
   payload: userData
 });
 
-export const userSignInFail = (err: any): { type: string; payload: any } => ({
+export const userSignInFail = (err: any): ReducerPayload => ({
   type: SIGNIN_FAIL,
   payload: err.response.data
 });
 
 export const userSignUpRequest = (): { type: string } => ({ type: SIGNUP_REQUEST });
 
-export const userSignUpSuccess = (res: any): { type: string; payload: any } => ({
+export const userSignUpSuccess = (res: any): ReducerPayload => ({
   type: SIGNUP_SUCCESS,
   payload: res.data
 });
 
-export const userSignUpFail = (err: any): { type: string; payload: any } => ({
+export const userSignUpFail = (err: any): ReducerPayload => ({
   type: SIGNUP_FAIL,
   payload: err
 });

@@ -6,17 +6,12 @@ const createErrorMsg = 'your Create Query did not use "INSERT"';
 export const dbCreateSync = (query = '', params: any, res: express.Response): void => {
   if (!query.includes('INSERT')) throw new Error(createErrorMsg);
 
-  return dbConnection.query(
-    query,
-    params,
-    /* eslint-disable */
-    (err: Error, results: any) => {
-      /* eslint-enable */
-      if (err) {
-        return res.send({ err });
-      }
+  return dbConnection.query(query, params, (err: Error) => {
+    if (err) {
+      return res.send({ err });
     }
-  );
+    return res.status(201);
+  });
 };
 
 export const dbCreateAsync = (
@@ -28,19 +23,13 @@ export const dbCreateAsync = (
   if (!query.includes('INSERT')) throw new Error(createErrorMsg);
 
   return new Promise((resolve, reject) => {
-    dbConnection.query(
-      query,
-      params,
-      /* eslint-disable */
-      (err: Error, results: any) => {
-        /* eslint-enable */
-        if (err) {
-          res.send({ err });
-          return reject(err);
-        }
-
-        return resolve(resolvedValue);
+    dbConnection.query(query, params, (err: Error) => {
+      if (err) {
+        res.send({ err });
+        return reject(err);
       }
-    );
+
+      return resolve(resolvedValue);
+    });
   });
 };
