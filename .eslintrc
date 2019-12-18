@@ -7,31 +7,58 @@
   "extends": [
     "airbnb-base",
     "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
     "plugin:prettier/recommended",
     "prettier/@typescript-eslint"
   ],
   "parser": "@typescript-eslint/parser",
   "plugins": [
     "@typescript-eslint",
+    "react",
     "react-hooks",
     "jest",
     "cypress"
   ],
   "settings": {
-    "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
+    "import/extensions": [
+      ".js",
+      ".jsx",
+      ".ts",
+      ".tsx"
+    ],
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
+      "@typescript-eslint/parser": [
+        ".ts",
+        ".tsx"
+      ]
     },
     "import/resolver": {
       "node": {
         "alias": {
           "map": [
-            ["~config", "src/server/config"],
-            ["~constants", "src/server/constants"],
-            ["~resources", "src/server/resources"],
-            ["~utils", "src/server/utils"]
+            [
+              "~config",
+              "src/server/config"
+            ],
+            [
+              "~constants",
+              "src/server/constants"
+            ],
+            [
+              "~resources",
+              "src/server/resources"
+            ],
+            [
+              "~utils",
+              "src/server/utils"
+            ]
           ],
-          "extensions": [".js", ".jsx", ".ts", ".tsx"]
+          "extensions": [
+            ".js",
+            ".jsx",
+            ".ts",
+            ".tsx"
+          ]
         }
       }
     }
