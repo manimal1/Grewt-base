@@ -30,17 +30,17 @@ class Signup extends Component<SignupProps, SignupState> {
     };
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     if (this.props.auth.isAuthenticated) {
       this.props.history.push('/');
     }
   }
 
-  onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const newUser = {
       email: this.state.email,
@@ -52,17 +52,16 @@ class Signup extends Component<SignupProps, SignupState> {
     this.props.userSignup(newUser, this.props.history);
   };
 
-  render() {
+  render(): React.ReactElement {
     const { email, password, firstname, lastname } = this.state;
-    const onChange = this.onChange;
-    const onSubmit = this.onSubmit;
+    const { onChange, onSubmit } = this;
     const titleLabel = 'Sign up';
     const buttonLabel = 'Register';
     const inputItems = [
-      { label: 'firstname', type: 'text', value: firstname },
-      { label: 'lastname', type: 'text', value: lastname },
-      { label: 'email', type: 'email', value: email },
-      { label: 'password', type: 'password', value: password }
+      { key: 'signup-firstname-key', label: 'firstname', type: 'text', value: firstname },
+      { key: 'signup-lastname-key', label: 'lastname', type: 'text', value: lastname },
+      { key: 'signup-email-key', label: 'email', type: 'email', value: email },
+      { key: 'signup-password-key', label: 'password', type: 'password', value: password }
     ];
 
     return (
@@ -79,7 +78,7 @@ class Signup extends Component<SignupProps, SignupState> {
   }
 }
 
-const mapStateToProps = (state: { auth: any }) => ({
+const mapStateToProps = (state: { auth: any }): object => ({
   auth: state.auth
 });
 
