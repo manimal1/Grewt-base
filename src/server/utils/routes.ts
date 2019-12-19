@@ -1,7 +1,7 @@
 import { signin, signup, protectedRoute } from './auth';
 import userRouter from '../resources/user/user.router';
 
-function getRoutes(app: any): any {
+function setRoutes(app: any): any {
   app.post('/auth/signin', signin);
   app.post('/auth/signup', signup);
 
@@ -9,4 +9,4 @@ function getRoutes(app: any): any {
   app.use('/api/users', userRouter);
 }
 
-export default getRoutes;
+export default setRoutes;

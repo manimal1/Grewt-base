@@ -6,7 +6,7 @@ import path from 'path';
 import compression from 'compression';
 
 import { config } from './config';
-import { dbConnection, getRoutes } from './utils';
+import { dbConnection, setRoutes } from './utils';
 
 const { json, urlencoded } = bodyParser;
 const { port } = config;
@@ -39,7 +39,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 // get and use routes set in the routes file
-getRoutes(app);
+setRoutes(app);
 
 export const start = async (): Promise<void> => {
   /* eslint-disable no-console */
